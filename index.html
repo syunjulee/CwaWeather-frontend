@@ -6,6 +6,8 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>阿莫媽媽的天氣小助手</title>
+
+  <!-- 全部改用 v1 圖示 -->
   <link rel="icon" type="image/png" href="./icon-v1.png">
   <link rel="apple-touch-icon" href="./icon-v1.png">
   <link rel="apple-touch-icon" sizes="180x180" href="./icon-v1.png">
@@ -19,7 +21,6 @@
 
   <style>
     :root {
-      /* 暖色系主題 */
       --ac-bg-main: #FCD5B5;
       --ac-bg-alt: #FBE4C8;
       --ac-cream: #FFF7E6;
@@ -43,7 +44,6 @@
     body {
       font-family: 'Zen Maru Gothic', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--ac-bg-main);
-      /* 8-bit 格線背景 */
       background-image:
         linear-gradient(to right, rgba(255, 255, 255, 0.25) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255, 255, 255, 0.25) 1px, transparent 1px);
@@ -104,6 +104,11 @@
       padding: 18px 16px 24px;
       max-width: 600px;
       margin: 0 auto;
+    }
+
+    /* RWD 佈局容器（手機預設單欄） */
+    .layout-grid {
+      display: block;
     }
 
     /* Hero 卡片 */
@@ -310,7 +315,11 @@
       border-right: 7px solid var(--ac-bg-alt);
     }
 
-    /* 區塊標題 */
+    /* 稍後預報區塊 */
+    .future-section {
+      margin-top: 18px;
+    }
+
     .section-title {
       font-size: 0.8rem;
       margin-bottom: 10px;
@@ -331,7 +340,6 @@
       font-size: 0.7rem;
     }
 
-    /* 橫向卡片 */
     .scroll-container {
       display: flex;
       overflow-x: auto;
@@ -420,9 +428,99 @@
       font-size: 0.8rem;
     }
 
-    @media (min-width: 480px) {
+    /* =========================
+       RWD 斷點：414 / 768 / 1440
+       ========================= */
+
+    /* 414 以上：稍微加寬、字級微調 */
+    @media (min-width: 414px) {
+      .container {
+        padding: 20px 20px 28px;
+        max-width: 640px;
+      }
+
+      .hero-temp {
+        font-size: 3.6rem;
+      }
+
+      .hero-temp .pixel-font {
+        font-size: 3rem;
+      }
+
+      .mini-card {
+        min-width: 130px;
+      }
+    }
+
+    /* 768 以上：平板與小桌機，兩欄版面 */
+    @media (min-width: 768px) {
+      .container {
+        max-width: 960px;
+        padding: 24px 32px 36px;
+      }
+
+      .layout-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+        align-items: flex-start;
+        gap: 24px;
+      }
+
+      .hero-card {
+        margin-bottom: 0;
+      }
+
+      .future-section {
+        margin-top: 0;
+      }
+
+      .section-title {
+        margin-left: 0;
+      }
+
       .hero-temp {
         font-size: 3.8rem;
+      }
+
+      .hero-temp .pixel-font {
+        font-size: 3.2rem;
+      }
+
+      .hero-desc {
+        font-size: 1.3rem;
+      }
+
+      .mini-card {
+        min-width: 140px;
+      }
+    }
+
+    /* 1440 以上：大桌機，版面更寬、間距更舒服 */
+    @media (min-width: 1440px) {
+      .container {
+        max-width: 1120px;
+        padding: 28px 40px 40px;
+      }
+
+      .layout-grid {
+        gap: 32px;
+      }
+
+      .hero-card {
+        padding: 30px 26px 26px;
+      }
+
+      .hero-temp {
+        font-size: 4.2rem;
+      }
+
+      .hero-temp .pixel-font {
+        font-size: 3.4rem;
+      }
+
+      .mini-card {
+        min-width: 150px;
+        padding: 16px 12px;
       }
     }
   </style>
@@ -441,13 +539,18 @@
 
   <div class="container" id="mainContent" style="display: none;">
 
-    <div id="heroCard"></div>
+    <!-- 新增 layout-grid，讓桌機/平板可以兩欄排版 -->
+    <div class="layout-grid">
+      <div id="heroCard"></div>
 
-    <h3 class="section-title">
-      <span class="pixel-font">NEXT</span>
-      <span>稍後預報</span>
-    </h3>
-    <div class="scroll-container" id="futureForecasts"></div>
+      <div class="future-section">
+        <h3 class="section-title">
+          <span class="pixel-font">NEXT</span>
+          <span>稍後預報</span>
+        </h3>
+        <div class="scroll-container" id="futureForecasts"></div>
+      </div>
+    </div>
 
   </div>
 
@@ -556,7 +659,6 @@
             </div>
           </div>
 
-          <!-- 阿莫媽媽 NPC 對話區（改用 icon-v1.png） -->
           <div class="npc-wrapper">
             <div class="npc-avatar-frame">
               <img src="./icon-v1.png" alt="阿莫媽媽" class="npc-avatar-img">
