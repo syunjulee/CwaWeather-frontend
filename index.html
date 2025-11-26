@@ -7,12 +7,10 @@
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>阿莫媽媽的天氣小助手</title>
 
-  <!-- 全部改用 v1 圖示 -->
   <link rel="icon" type="image/png" href="./icon-v1.png">
   <link rel="apple-touch-icon" href="./icon-v1.png">
   <link rel="apple-touch-icon" sizes="180x180" href="./icon-v1.png">
 
-  <!-- 字體 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -28,7 +26,7 @@
       --ac-orange-dark: #F78B3D;
       --ac-red: #EF6F6C;
       --ac-yellow: #FFE48F;
-      --ac-brown: #6B4F3F;
+      --ac-brown: #5A4436;
       --ac-dark: #3A2C25;
       --ac-card-border: #E0B394;
       --ac-pixel-shadow: #C58C63;
@@ -43,6 +41,7 @@
 
     body {
       font-family: 'Zen Maru Gothic', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 20px;
       background-color: var(--ac-bg-main);
       background-image:
         linear-gradient(to right, rgba(255, 255, 255, 0.25) 1px, transparent 1px),
@@ -51,7 +50,8 @@
       min-height: 100vh;
       color: var(--ac-dark);
       overflow-x: hidden;
-      padding-bottom: 20px;
+      padding-bottom: 28px;
+      line-height: 1.7;
     }
 
     .pixel-font {
@@ -59,12 +59,11 @@
       letter-spacing: 0.04em;
     }
 
-    /* 頂部狀態列 */
     .status-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 14px;
+      padding: 14px 20px;
       background: var(--ac-orange);
       border-bottom: 4px solid #000;
       box-shadow:
@@ -78,66 +77,66 @@
     .location-pill {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
       background: var(--ac-yellow);
       color: var(--ac-brown);
-      padding: 6px 12px;
-      border-radius: 4px;
+      padding: 8px 18px;
+      border-radius: 6px;
       border: 3px solid #000;
       box-shadow: 0 3px 0 #000;
       font-weight: 900;
-      font-size: 0.9rem;
+      font-size: 1.1rem;
     }
 
     .update-pill {
-      font-size: 0.6rem;
+      font-size: 0.95rem;
       color: #000;
       background: var(--ac-cream);
-      padding: 4px 8px;
-      border-radius: 4px;
+      padding: 6px 12px;
+      border-radius: 6px;
       border: 3px solid #000;
       box-shadow: 0 3px 0 #000;
       font-weight: 700;
     }
 
     .container {
-      padding: 18px 16px 24px;
-      max-width: 600px;
+      padding: 24px 18px 36px;
+      max-width: 720px;
       margin: 0 auto;
     }
 
-    /* RWD 佈局容器（手機預設單欄） */
-    .layout-grid {
-      display: block;
+    .layout-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
     }
 
-    /* Hero 卡片 */
     .hero-card {
       background: var(--ac-cream);
-      border-radius: 8px;
-      padding: 26px 20px 22px;
+      border-radius: 10px;
+      padding: 32px 24px 26px;
       text-align: center;
       border: 4px solid #000;
       box-shadow:
         0 4px 0 #000,
         0 8px 0 var(--ac-pixel-shadow);
-      margin-bottom: 18px;
       position: relative;
+      width: 100%;
     }
 
     .hero-period {
       position: absolute;
-      top: -16px;
+      top: -20px;
       left: 50%;
       transform: translateX(-50%);
       background: var(--ac-red);
       color: #FFF7E6;
-      padding: 6px 16px;
-      border-radius: 4px;
+      padding: 8px 22px;
+      border-radius: 6px;
       border: 4px solid #000;
       box-shadow: 0 4px 0 #000;
       font-weight: 900;
-      font-size: 0.8rem;
+      font-size: 1.05rem;
       white-space: nowrap;
     }
 
@@ -145,12 +144,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 12px;
-      margin: 18px 0 10px;
+      gap: 18px;
+      margin: 26px 0 14px;
     }
 
     .hero-icon {
-      font-size: 4.5rem;
+      font-size: 5.4rem;
       filter: drop-shadow(0 3px 0 rgba(0, 0, 0, 0.3));
       animation: bounce 3s infinite steps(2);
     }
@@ -168,30 +167,29 @@
     }
 
     .hero-temp {
-      font-size: 3.4rem;
+      font-size: 4.3rem;
       font-weight: 900;
       color: var(--ac-brown);
-      line-height: 1;
+      line-height: 1.15;
     }
 
     .hero-temp .pixel-font {
-      font-size: 2.8rem;
+      font-size: 3.8rem;
     }
 
     .hero-desc {
-      font-size: 1.2rem;
-      color: #8A6A55;
-      margin-bottom: 12px;
-      font-weight: bold;
+      font-size: 1.5rem;
+      color: #5A4436;
+      margin-bottom: 18px;
+      font-weight: 900;
     }
 
-    /* 建議區 */
     .advice-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 16px;
-      padding-top: 14px;
+      gap: 14px;
+      margin-top: 20px;
+      padding-top: 18px;
       border-top: 3px dashed #E0B394;
     }
 
@@ -200,51 +198,71 @@
       flex-direction: column;
       align-items: center;
       background: var(--ac-bg-alt);
-      padding: 10px 8px;
-      border-radius: 6px;
+      padding: 14px 10px;
+      border-radius: 8px;
       border: 3px solid #000;
       box-shadow: 0 3px 0 #000;
     }
 
     .advice-icon {
-      font-size: 1.8rem;
-      margin-bottom: 4px;
+      font-size: 2.3rem;
+      margin-bottom: 6px;
     }
 
     .advice-text {
-      font-size: 0.95rem;
+      font-size: 1.2rem;
       font-weight: 900;
       color: var(--ac-brown);
       margin: 4px 0;
-      line-height: 1.3;
+      line-height: 1.5;
       text-align: center;
     }
 
     .advice-item-sub {
-      font-size: 0.7rem;
+      font-size: 1rem;
       color: #5B4A40;
-      margin-top: 2px;
+      margin-top: 4px;
     }
 
-    /* 阿莫媽媽 NPC 區塊 */
     .npc-wrapper {
-      margin-top: 16px;
+      margin-top: 24px;
       display: flex;
-      align-items: flex-start;
+      flex-direction: column;
+      align-items: center;
       gap: 10px;
     }
 
+    .npc-name-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: var(--ac-red);
+      color: #FFF7E6;
+      border-radius: 6px;
+      border: 3px solid #000;
+      box-shadow: 0 3px 0 #000;
+      font-size: 1.05rem;
+      font-weight: 900;
+    }
+
+    .npc-name-tag .pixel-font {
+      font-size: 0.8rem;
+    }
+
     .npc-avatar-frame {
-      width: 64px;
-      height: 64px;
+      width: 104px;
+      height: 104px;
       background: var(--ac-bg-alt);
-      border-radius: 4px;
+      border-radius: 8px;
       border: 4px solid #000;
       box-shadow: 0 4px 0 #000;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      flex-shrink: 0;
     }
 
     .npc-avatar-img {
@@ -256,146 +274,132 @@
     }
 
     .npc-dialog {
-      flex: 1;
+      width: 100%;
+      max-width: 520px;
       position: relative;
       background: var(--ac-bg-alt);
-      border-radius: 6px;
+      border-radius: 10px;
       border: 4px solid #000;
       box-shadow: 0 4px 0 #000;
-      padding: 8px 10px 10px;
-    }
-
-    .npc-name-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 8px;
-      background: var(--ac-red);
-      color: #FFF7E6;
-      border-radius: 4px;
-      border: 3px solid #000;
-      box-shadow: 0 3px 0 #000;
-      font-size: 0.7rem;
-      font-weight: 900;
-      margin-bottom: 4px;
-    }
-
-    .npc-name-tag .pixel-font {
-      font-size: 0.6rem;
+      padding: 12px 14px 14px;
+      text-align: center;
     }
 
     .npc-text {
-      font-size: 0.9rem;
+      font-size: 1.2rem;
       color: #3A2C25;
-      line-height: 1.4;
-      margin-top: 4px;
+      line-height: 1.7;
     }
 
     .npc-dialog::before {
       content: "";
       position: absolute;
-      left: -10px;
-      top: 18px;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
       width: 0;
       height: 0;
-      border-top: 6px solid transparent;
-      border-bottom: 6px solid transparent;
-      border-right: 10px solid #000;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 14px solid #000;
     }
 
     .npc-dialog::after {
       content: "";
       position: absolute;
-      left: -7px;
-      top: 20px;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
       width: 0;
       height: 0;
-      border-top: 4px solid transparent;
-      border-bottom: 4px solid transparent;
-      border-right: 7px solid var(--ac-bg-alt);
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 11px solid var(--ac-bg-alt);
     }
 
-    /* 稍後預報區塊 */
+    /* ===== 稍後預報區塊 ===== */
+
     .future-section {
-      margin-top: 18px;
+      width: 100%;
+      /* 手機：container 等寬 */
+    }
+
+    .future-inner {
+      width: 100%;
+      /* 手機：跟 hero 一樣寬（填滿 container） */
     }
 
     .section-title {
-      font-size: 0.8rem;
-      margin-bottom: 10px;
-      margin-left: 4px;
+      font-size: 1.1rem;
+      margin-bottom: 14px;
       font-weight: 900;
       color: #000;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 10px;
+      gap: 8px;
+      padding: 7px 14px;
       background: var(--ac-orange-dark);
-      border-radius: 4px;
+      border-radius: 5px;
       border: 3px solid #000;
       box-shadow: 0 3px 0 #000;
     }
 
-    .section-title span {
-      font-size: 0.7rem;
+    .section-title span.label-en {
+      font-size: 0.9rem;
+    }
+
+    .section-title span.label-zh {
+      font-size: 1rem;
     }
 
     .scroll-container {
-      display: flex;
-      overflow-x: auto;
-      gap: 12px;
-      padding: 4px 2px 10px;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-
-    .scroll-container::-webkit-scrollbar {
-      display: none;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 8px 0 0;
     }
 
     .mini-card {
-      min-width: 120px;
+      width: 100%;
       background: var(--ac-cream);
-      border-radius: 6px;
-      padding: 14px 10px;
+      border-radius: 10px;
+      padding: 18px 14px;
       text-align: center;
       border: 3px solid #000;
       box-shadow: 0 3px 0 #000;
-      flex-shrink: 0;
     }
 
     .mini-time {
       display: inline-block;
       background: var(--ac-yellow);
       color: #000;
-      padding: 4px 6px;
-      border-radius: 4px;
+      padding: 6px 10px;
+      border-radius: 5px;
       border: 2px solid #000;
-      font-size: 0.65rem;
+      font-size: 1.05rem;
       font-weight: 800;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .mini-icon {
-      font-size: 2.1rem;
-      margin: 4px 0;
+      font-size: 2.6rem;
+      margin: 6px 0;
       filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.25));
     }
 
     .mini-temp {
-      font-size: 0.95rem;
+      font-size: 1.2rem;
       font-weight: 800;
       color: var(--ac-dark);
-      margin-top: 2px;
+      margin-top: 6px;
     }
 
     .mini-rain {
-      font-size: 0.7rem;
+      font-size: 1rem;
       color: #5B4A40;
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
-    /* Loading 畫面 */
     .loading-screen {
       position: fixed;
       top: 0;
@@ -411,7 +415,7 @@
     }
 
     .loading-icon {
-      font-size: 4rem;
+      font-size: 4.6rem;
       animation: bounce 2s infinite steps(2);
       text-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
     }
@@ -419,108 +423,96 @@
     .loading-text {
       color: #000;
       font-weight: bold;
-      margin-top: 18px;
-      padding: 6px 10px;
+      margin-top: 20px;
+      padding: 8px 14px;
       background: var(--ac-cream);
-      border-radius: 4px;
+      border-radius: 6px;
       border: 3px solid #000;
       box-shadow: 0 3px 0 #000;
-      font-size: 0.8rem;
+      font-size: 1.05rem;
     }
 
-    /* =========================
-       RWD 斷點：414 / 768 / 1440
-       ========================= */
-
-    /* 414 以上：稍微加寬、字級微調 */
     @media (min-width: 414px) {
       .container {
-        padding: 20px 20px 28px;
-        max-width: 640px;
+        padding: 26px 22px 40px;
+        max-width: 760px;
       }
 
       .hero-temp {
-        font-size: 3.6rem;
+        font-size: 4.6rem;
       }
 
       .hero-temp .pixel-font {
-        font-size: 3rem;
-      }
-
-      .mini-card {
-        min-width: 130px;
-      }
-    }
-
-    /* 768 以上：平板與小桌機，兩欄版面 */
-    @media (min-width: 768px) {
-      .container {
-        max-width: 960px;
-        padding: 24px 32px 36px;
-      }
-
-      .layout-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-        align-items: flex-start;
-        gap: 24px;
-      }
-
-      .hero-card {
-        margin-bottom: 0;
-      }
-
-      .future-section {
-        margin-top: 0;
-      }
-
-      .section-title {
-        margin-left: 0;
-      }
-
-      .hero-temp {
-        font-size: 3.8rem;
-      }
-
-      .hero-temp .pixel-font {
-        font-size: 3.2rem;
+        font-size: 4.1rem;
       }
 
       .hero-desc {
-        font-size: 1.3rem;
-      }
-
-      .mini-card {
-        min-width: 140px;
+        font-size: 1.55rem;
       }
     }
 
-    /* 1440 以上：大桌機，版面更寬、間距更舒服 */
-    @media (min-width: 1440px) {
+    @media (min-width: 768px) {
+      body {
+        font-size: 22px;
+      }
+
       .container {
-        max-width: 1120px;
-        padding: 28px 40px 40px;
+        max-width: 880px;
       }
 
-      .layout-grid {
-        gap: 32px;
+      /* 關鍵：平板以上，NEXT 區塊縮窄＋置中 */
+      .future-section {
+        display: flex;
+        justify-content: center;
       }
 
-      .hero-card {
-        padding: 30px 26px 26px;
+      .future-inner {
+        max-width: 640px;
+        width: 100%;
       }
 
-      .hero-temp {
-        font-size: 4.2rem;
-      }
-
-      .hero-temp .pixel-font {
-        font-size: 3.4rem;
+      .scroll-container {
+        grid-template-columns: 1fr 1fr;
       }
 
       .mini-card {
-        min-width: 150px;
-        padding: 16px 12px;
+        padding: 20px 16px;
+      }
+
+      .npc-avatar-frame {
+        width: 112px;
+        height: 112px;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      body {
+        font-size: 24px;
+      }
+
+      .container {
+        max-width: 960px;
+      }
+
+      .hero-icon {
+        font-size: 5.8rem;
+      }
+
+      .hero-temp {
+        font-size: 5rem;
+      }
+
+      .hero-temp .pixel-font {
+        font-size: 4.4rem;
+      }
+
+      .future-inner {
+        max-width: 720px;
+      }
+
+      .scroll-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
       }
     }
   </style>
@@ -539,16 +531,17 @@
 
   <div class="container" id="mainContent" style="display: none;">
 
-    <!-- 新增 layout-grid，讓桌機/平板可以兩欄排版 -->
-    <div class="layout-grid">
+    <div class="layout-stack">
       <div id="heroCard"></div>
 
       <div class="future-section">
-        <h3 class="section-title">
-          <span class="pixel-font">NEXT</span>
-          <span>稍後預報</span>
-        </h3>
-        <div class="scroll-container" id="futureForecasts"></div>
+        <div class="future-inner">
+          <h3 class="section-title">
+            <span class="label-en pixel-font">NEXT</span>
+            <span class="label-zh">稍後預報</span>
+          </h3>
+          <div class="scroll-container" id="futureForecasts"></div>
+        </div>
       </div>
     </div>
 
@@ -597,7 +590,7 @@
         return "今天雨蠻大的，出門一定要帶好雨具，路上慢慢走不要趕。";
       }
       if (maxTemp >= 32) {
-        return "今天很悶熱，記得多補充水分，外出能走陰影就走陰影。";
+        return "今天很蠻熱，記得多補充水分，外出能走陰影就走陰影。";
       }
       if (maxTemp <= 16) {
         return "今天比較涼，出門前加一件外套，不要讓自己著涼。";
@@ -660,14 +653,14 @@
           </div>
 
           <div class="npc-wrapper">
+            <div class="npc-name-tag">
+              <span class="pixel-font">NPC</span>
+              <span>阿莫媽媽</span>
+            </div>
             <div class="npc-avatar-frame">
               <img src="./icon-v1.png" alt="阿莫媽媽" class="npc-avatar-img">
             </div>
             <div class="npc-dialog">
-              <div class="npc-name-tag">
-                <span class="pixel-font">NPC</span>
-                <span>阿莫媽媽</span>
-              </div>
               <div class="npc-text">${npcMessage}</div>
             </div>
           </div>
@@ -688,7 +681,7 @@
 
         scrollContainer.innerHTML += `
           <div class="mini-card">
-            <div class="mini-time pixel-font">${p}</div>
+            <div class="mini-time">${p}</div>
             <div class="mini-icon">${getWeatherIcon(f.weather)}</div>
             <div class="mini-temp">${f.minTemp}° - ${f.maxTemp}°</div>
             <div class="mini-rain">💧${f.rain}</div>
